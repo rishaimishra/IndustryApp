@@ -51,12 +51,40 @@
 
 									<div class="form-group ">
 										<label for="title">Report From Month</label>
-										<input type="date"  class="form-control"  placeholder="Enter name"  name="from_month" >
+										<select class="form-control" name="from_month" id="from_month">
+										<option value="">Select month</option>
+										<option value="Jan">Jan</option>
+										<option value="Feb">Feb</option>
+										<option value="Mar">Mar</option>
+										<option value="Apl">Apl</option>
+										<option value="May">May</option>
+										<option value="Jun">Jun</option>
+										<option value="Jul">Jul</option>
+										<option value="Aug">Aug</option>
+										<option value="Sept">Sept</option>
+										<option value="Oct">Oct</option>
+										<option value="Nov">Nov</option>
+										<option value="Dec">Dec</option>
+										</select>
 									</div>
 
 									<div class="form-group">
 										<label for="title">Report End Month</label>
-										<input type="date"  class="form-control"  placeholder="Enter email"  name="end_month"  >
+										<select class="form-control" name="end_month" id="end_month">
+										<option value="">Select month</option>
+										<option value="Jan">Jan</option>
+										<option value="Feb">Feb</option>
+										<option value="Mar">Mar</option>
+										<option value="Apl">Apl</option>
+										<option value="May">May</option>
+										<option value="Jun">Jun</option>
+										<option value="Jul">Jul</option>
+										<option value="Aug">Aug</option>
+										<option value="Sept">Sept</option>
+										<option value="Oct">Oct</option>
+										<option value="Nov">Nov</option>
+										<option value="Dec">Dec</option>
+										</select>
 									</div>
 
 									

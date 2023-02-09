@@ -58,8 +58,8 @@ font-family: 'Roboto', sans-serif;
 .btn-primary:focus,
 .btn-primary:hover,
 .open > .dropdown-toggle.btn-primary {
-  background-color: #0a5688 !important;
-border: 1px solid #0a5688 !important;
+  background-color: #fbbc93;
+border: 1px solid #fbbc93;
 border-radius: 3px;
 }
 .btn-success,
@@ -1499,7 +1499,7 @@ a:focus, a:hover {
     padding: 0 12px;
     padding-right: 12px;
     padding-right: 20px;
-    border-radius: 2px;
+    border-radius: 6px;
     color: #fff;
     font: 400 15px/49px 'Roboto', sans-serif;
     background: #fbbc93;

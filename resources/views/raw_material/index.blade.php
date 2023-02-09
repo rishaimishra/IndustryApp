@@ -2,7 +2,7 @@
 
 
 @section('title')
-<title>Manage Production Sales In Domestic</title>
+<title>Manage Raw Material</title>
 @endsection
 
 @section('style')

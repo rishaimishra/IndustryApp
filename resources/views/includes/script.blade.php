@@ -39,13 +39,7 @@
 
 
 <script src="{{ URL::to('public/admin/assets/js/custom-file-input.js')}}"></script>
-<script type="text/javascript">
-  $('.dropdown').on('click',function(e){
-    var id =  $(this).data('id');
-    // alert(id);
-    $('#d_'+id).toggle();
-  })
-</script>
+
 
 {{-- <script type="text/javascript">
   $('.doctor_drop').on('click',function(e){
@@ -74,12 +68,13 @@
    
 </script> --}}
 <!--Collapse Menu-->
-<script>
-     $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("active");
-    });   
-</script>
+<script type="text/javascript">
+  $('.dropdown').on('click',function(e){
+    var id =  $(this).data('id');
+    // alert(id);
+    $('#d_'+id).toggle();
+  })
+</script>>
 <!--/Collapse Menu-->
 
 <!--Datatable-->
@@ -98,3 +93,4 @@ $(document).ready(function() {
 } );
 </script> --}}
 <!--/DataTable-->
+

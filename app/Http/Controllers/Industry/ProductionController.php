@@ -10,7 +10,8 @@ class ProductionController extends Controller
     public function index()
     {
         $data = [];
-        $data['data'] = Production::where('status','!=','D')->where('user_id',auth()->user()->id)->orderBy('id','desc')->get();
+        $data['data'] = Production::where('status','!=','D')->where('type','H')->where('user_id',auth()->user()->id)->orderBy('id','desc')->get();
+        // return $data['data'];
         return view('production.index',$data);
     }
 
@@ -40,7 +41,7 @@ class ProductionController extends Controller
     public function deleteView($id)
     {
         $data = [];
-        $data['data'] = Production::where('id',$id)->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
+        $data['data'] = Production::where('id',$id)->where('type','H')->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
         if($data['data']!="")
         {
             return view('production.delete',$data);
@@ -62,7 +63,7 @@ class ProductionController extends Controller
     public function edit($id)
     {
         $data = [];
-        $data['data'] = Production::where('id',$id)->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
+        $data['data'] = Production::where('id',$id)->where('type','H')->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
         if($data['data']!="")
         {
             return view('production.edit',$data);

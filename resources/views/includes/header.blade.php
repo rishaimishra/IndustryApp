@@ -2,7 +2,7 @@
     <!-- LOGO -->
     <div class="topbar-left">
         <div class="text-center">
-            {{-- <a href="{{route('admin.dashboard')}}" class="logo"><i style="font-size:10px;">Neighbourhood Administration</i> {{-- <img src="{{asset('public/frontend/assets/img/home/header/logo.jpg')}}"> --}}</a>
+            <a href="#" class="logo"><img src="{{asset('public/admin/assets/images/logo.png')}}" style="height: 73px;width: 100%;"></a>
         </div>
     </div>
     <a id="menu-toggle" href="#" class="btn-menu toggle">

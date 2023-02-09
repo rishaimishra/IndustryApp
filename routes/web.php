@@ -12,6 +12,16 @@ use App\Http\Controllers\Industry\SalesDomesticController;
 use App\Http\Controllers\Industry\SalesExportController;
 use App\Http\Controllers\Industry\RawMaterialController;
 use App\Http\Controllers\Industry\CurrencyController;
+use App\Http\Controllers\Industry\PowerController;
+use App\Http\Controllers\Industry\Employe\EmployeController;
+use App\Http\Controllers\Industry\TrainingController;
+use App\Http\Controllers\Industry\IssueController;
+use App\Http\Controllers\Industry\FinanceController;
+use App\Http\Controllers\Industry\OtherController;
+use App\Http\Controllers\CsiPam\ProductionControlleryealy;
+use App\Http\Controllers\CsiPam\SalesDomesticYearly;
+use App\Http\Controllers\CsiPam\SalesExportYearly;
+use App\Http\Controllers\CsiPam\RawYearly;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +34,7 @@ use App\Http\Controllers\Industry\CurrencyController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Auth::routes();
@@ -151,3 +161,146 @@ Route::post('manage-convetible-currency/delete-submit',[CurrencyController::clas
 Route::get('manage-convetible-currency/edit/{id}',[CurrencyController::class,'edit'])->name('manage.currency.edit');
 
 Route::post('manage-convetible-currency/update',[CurrencyController::class,'update'])->name('manage.currency.update');
+
+
+// manage-power-consumption
+
+Route::get('manage-power-consumption',[PowerController::class,'index'])->name('manage.power');
+Route::get('manage-power-consumption/add',[PowerController::class,'add'])->name('manage.power.add');
+Route::post('manage-power-consumption/insert',[PowerController::class,'insert'])->name('manage.power.insert');
+
+Route::get('manage-power-consumption/delete/{id}',[PowerController::class,'deleteView'])->name('manage.power.delete');
+
+Route::post('manage-power-consumption/delete-submit',[PowerController::class,'deleteSubmit'])->name('manage.power.delete.submit');
+
+Route::get('manage-power-consumption/edit/{id}',[PowerController::class,'edit'])->name('manage.power.edit');
+
+Route::post('manage-power-consumption/update',[PowerController::class,'update'])->name('manage.power.update');
+
+
+// manage-employment-record
+Route::get('manage-employment-record',[EmployeController::class,'index'])->name('manage.employe');
+Route::get('manage-employment-record/add',[EmployeController::class,'add'])->name('manage.employe.add');
+Route::post('manage-employment-record/insert',[EmployeController::class,'insert'])->name('manage.employe.insert');
+
+Route::get('manage-employment-record/delete/{id}',[EmployeController::class,'deleteView'])->name('manage.employe.delete');
+
+Route::post('manage-employment-record/delete-submit',[EmployeController::class,'deleteSubmit'])->name('manage.employe.delete.submit');
+
+Route::get('manage-employment-record/edit/{id}',[EmployeController::class,'edit'])->name('manage.employe.edit');
+
+Route::post('manage-employment-record/update',[EmployeController::class,'update'])->name('manage.employe.update');
+
+
+// manage-training-record
+Route::get('manage-training-record',[TrainingController::class,'index'])->name('manage.training');
+Route::get('manage-training-record/add',[TrainingController::class,'add'])->name('manage.training.add');
+Route::post('manage-training-record/insert',[TrainingController::class,'insert'])->name('manage.training.insert');
+
+Route::get('manage-training-record/delete/{id}',[TrainingController::class,'deleteView'])->name('manage.training.delete');
+
+Route::post('manage-training-record/delete-submit',[TrainingController::class,'deleteSubmit'])->name('manage.training.delete.submit');
+
+Route::get('manage-training-record/edit/{id}',[TrainingController::class,'edit'])->name('manage.training.edit');
+
+Route::post('manage-training-record/update',[TrainingController::class,'update'])->name('manage.training.update');
+
+
+// manage-issues-challenges
+Route::get('manage-issues-challenges',[IssueController::class,'index'])->name('manage.issues');
+Route::get('manage-issues-challenges/add',[IssueController::class,'add'])->name('manage.issues.add');
+Route::post('manage-issues-challenges/insert',[IssueController::class,'insert'])->name('manage.issues.insert');
+
+Route::get('manage-issues-challenges/delete/{id}',[IssueController::class,'deleteView'])->name('manage.issues.delete');
+
+Route::post('manage-issues-challenges/delete-submit',[IssueController::class,'deleteSubmit'])->name('manage.issues.delete.submit');
+
+Route::get('manage-issues-challenges/edit/{id}',[IssueController::class,'edit'])->name('manage.issues.edit');
+
+Route::post('manage-issues-challenges/update',[IssueController::class,'update'])->name('manage.issues.update');
+
+
+
+// manage-financial-information
+Route::get('manage-financial-information',[FinanceController::class,'index'])->name('manage.finance');
+Route::get('manage-financial-information/add',[FinanceController::class,'add'])->name('manage.finance.add');
+Route::post('manage-financial-information/insert',[FinanceController::class,'insert'])->name('manage.finance.insert');
+
+Route::get('manage-financial-information/delete/{id}',[FinanceController::class,'deleteView'])->name('manage.finance.delete');
+
+Route::post('manage-financial-information/delete-submit',[FinanceController::class,'deleteSubmit'])->name('manage.finance.delete.submit');
+
+Route::get('manage-financial-information/edit/{id}',[FinanceController::class,'edit'])->name('manage.finance.edit');
+
+Route::post('manage-financial-information/update',[FinanceController::class,'update'])->name('manage.finance.update');
+
+
+// manage-other-information
+Route::get('manage-other-information',[OtherController::class,'index'])->name('manage.other');
+Route::get('manage-other-information/add',[OtherController::class,'add'])->name('manage.other.add');
+Route::post('manage-other-information/insert',[OtherController::class,'insert'])->name('manage.other.insert');
+
+Route::get('manage-other-information/delete/{id}',[OtherController::class,'deleteView'])->name('manage.other.delete');
+
+Route::post('manage-other-information/delete-submit',[OtherController::class,'deleteSubmit'])->name('manage.other.delete.submit');
+
+Route::get('manage-other-information/edit/{id}',[OtherController::class,'edit'])->name('manage.other.edit');
+
+Route::post('manage-other-information/update',[OtherController::class,'update'])->name('manage.other.update');
+
+
+
+
+// production-manufactureing-yearly
+Route::get('manage-production-manufactureing-yearly',[ProductionControlleryealy::class,'index'])->name('manage.production.manufacture.yearly');
+Route::get('manage-production-manufactureing-yearly/add',[ProductionControlleryealy::class,'add'])->name('manage.production.manufacture.add.yearly');
+Route::post('manage-production-manufactureing-yearly/insert',[ProductionControlleryealy::class,'insert'])->name('manage.production.manufacture.insert.yearly');
+
+Route::get('manage-production-manufactureing-yearly/delete/{id}',[ProductionControlleryealy::class,'deleteView'])->name('manage.production.manufacture.delete.yearly');
+
+Route::post('manage-production-manufactureing-yearly/delete-submit',[ProductionControlleryealy::class,'deleteSubmit'])->name('manage.production.manufacture.delete.submit.yearly');
+
+Route::get('manage-production-manufactureing-yearly/edit/{id}',[ProductionControlleryealy::class,'edit'])->name('manage.production.manufacture.edit.yearly');
+
+Route::post('manage-production-manufactureing-yearly/update',[ProductionControlleryealy::class,'update'])->name('manage.production.manufacture.update.yearly');
+
+
+// sales-domestic-yearly
+Route::get('manage-sales-domestic-yearly',[SalesDomesticYearly::class,'index'])->name('manage.sales.domestic.yearly');
+Route::get('manage-sales-domestic-yearly/add',[SalesDomesticYearly::class,'add'])->name('manage.sales.domestic.add.yearly');
+Route::post('manage-sales-domestic-yearly/insert',[SalesDomesticYearly::class,'insert'])->name('manage.sales.domestic.insert.yearly');
+
+Route::get('manage-sales-domestic-yearly/delete/{id}',[SalesDomesticYearly::class,'deleteView'])->name('manage.sales.domestic.delete.yearly');
+
+Route::post('manage-sales-domestic-yearly/delete-submit',[SalesDomesticYearly::class,'deleteSubmit'])->name('manage.sales.domestic.delete.submit.yearly');
+
+Route::get('manage-sales-domestic-yearly/edit/{id}',[SalesDomesticYearly::class,'edit'])->name('manage.sales.domestic.edit.yearly');
+
+Route::post('manage-sales-domestic-yearly/update',[SalesDomesticYearly::class,'update'])->name('manage.sales.domestic.update.yearly');
+
+
+// sales-export-yearly
+Route::get('manage-sales-export-yearly',[SalesExportYearly::class,'index'])->name('manage.sales.export.yearly');
+Route::get('manage-sales-export-yearly/add',[SalesExportYearly::class,'add'])->name('manage.sales.export.add.yearly');
+Route::post('manage-sales-export-yearly/insert',[SalesExportYearly::class,'insert'])->name('manage.sales.export.insert.yearly');
+
+Route::get('manage-sales-export-yearly/delete/{id}',[SalesExportYearly::class,'deleteView'])->name('manage.sales.export.delete.yearly');
+
+Route::post('manage-sales-export-yearly/delete-submit',[SalesExportYearly::class,'deleteSubmit'])->name('manage.sales.export.delete.submit.yearly');
+
+Route::get('manage-sales-export-yearly/edit/{id}',[SalesExportYearly::class,'edit'])->name('manage.sales.export.edit.yearly');
+
+Route::post('manage-sales-export-yearly/update',[SalesExportYearly::class,'update'])->name('manage.sales.export.update.yearly');
+
+// raw-material-yearly
+Route::get('manage-raw-material-yearly',[RawYearly::class,'index'])->name('manage.raw.material.yearly');
+Route::get('manage-raw-material-yearly/add',[RawYearly::class,'add'])->name('manage.raw.material.add.yearly');
+Route::post('manage-raw-material-yearly/insert',[RawYearly::class,'insert'])->name('manage.raw.material.insert.yearly');
+
+Route::get('manage-raw-material-yearly/delete/{id}',[RawYearly::class,'deleteView'])->name('manage.raw.material.delete.yearly');
+
+Route::post('manage-raw-material-yearly/delete-submit',[RawYearly::class,'deleteSubmit'])->name('manage.raw.material.delete.submit.yearly');
+
+Route::get('manage-raw-material-yearly/edit/{id}',[RawYearly::class,'edit'])->name('manage.raw.material.edit.yearly');
+
+Route::post('manage-raw-material-yearly/update',[RawYearly::class,'update'])->name('manage.raw.material.update.yearly');

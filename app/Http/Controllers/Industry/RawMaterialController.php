@@ -11,7 +11,7 @@ class RawMaterialController extends Controller
     public function index()
     {
         $data = [];
-        $data['data'] = RawMaterial::where('status','!=','D')->where('user_id',auth()->user()->id)->orderBy('id','desc')->get();
+        $data['data'] = RawMaterial::where('status','!=','D')->where('type','H')->where('user_id',auth()->user()->id)->orderBy('id','desc')->get();
         return view('raw_material.index',$data);
     }
 
@@ -44,7 +44,7 @@ class RawMaterialController extends Controller
     public function deleteView($id)
     {
         $data = [];
-        $data['data'] = RawMaterial::where('id',$id)->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
+        $data['data'] = RawMaterial::where('id',$id)->where('type','H')->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
         if($data['data']!="")
         {
             return view('raw_material.delete',$data);
@@ -66,7 +66,7 @@ class RawMaterialController extends Controller
     public function edit($id)
     {
         $data = [];
-        $data['data'] = RawMaterial::where('id',$id)->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
+        $data['data'] = RawMaterial::where('id',$id)->where('type','H')->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
         $data['country'] = Country::get();
         if($data['data']!="")
         {

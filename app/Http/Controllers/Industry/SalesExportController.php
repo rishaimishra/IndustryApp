@@ -11,14 +11,14 @@ class SalesExportController extends Controller
     public function index()
     {
         $data = [];
-        $data['data'] = SalesExport::where('status','!=','D')->where('user_id',auth()->user()->id)->orderBy('id','desc')->get();
+        $data['data'] = SalesExport::where('status','!=','D')->where('type','H')->where('user_id',auth()->user()->id)->orderBy('id','desc')->get();
         return view('sales_export.index',$data);
     }
 
     public function add()
     {
         $data = [];
-        $data['data'] = Production::where('status','!=','D')->where('user_id',auth()->user()->id)->get();
+        $data['data'] = Production::where('status','!=','D')->where('type','H')->where('user_id',auth()->user()->id)->get();
         return view('sales_export.add',$data);
     }
 
@@ -43,7 +43,7 @@ class SalesExportController extends Controller
     public function deleteView($id)
     {
         $data = [];
-        $data['data'] = SalesExport::where('id',$id)->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
+        $data['data'] = SalesExport::where('id',$id)->where('type','H')->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
         if($data['data']!="")
         {
             return view('sales_export.delete',$data);
@@ -65,7 +65,7 @@ class SalesExportController extends Controller
     public function edit($id)
     {
         $data = [];
-        $data['data'] = SalesExport::where('id',$id)->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
+        $data['data'] = SalesExport::where('id',$id)->where('type','H')->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
         $data['products'] = Production::where('status','!=','D')->where('user_id',auth()->user()->id)->get();
         if($data['data']!="")
         {
