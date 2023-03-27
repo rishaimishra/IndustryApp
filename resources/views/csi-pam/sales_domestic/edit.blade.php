@@ -47,13 +47,13 @@
 
 									<div class="form-group rm03">
 										<label for="title">Year</label>
-										<input type="number"  class="form-control"  placeholder="Enter year" value="{{@$data->year}}" name="year" >
+										<input type="number"  class="form-control"  placeholder="Enter year" value="{{@$data->year}}" name="year" readonly>
 									</div>
 
 
-									<div class="form-group ">
+									{{-- <div class="form-group ">
 										<label for="title">Report From Month</label>
-										<select class="form-control" name="from_month" id="from_month">
+										<select class="form-control" name="from_month" id="from_month" >
 										<option value="">Select month</option>
 										<option value="Jan" @if(@$data->from_month=="Jan") selected @endif>Jan</option>
 										<option value="Feb" @if(@$data->from_month=="Feb") selected @endif>Feb</option>
@@ -87,13 +87,13 @@
 										<option value="Nov" @if(@$data->end_month=="Nov") selected @endif>Nov</option>
 										<option value="Dec" @if(@$data->end_month=="Dec") selected @endif>Dec</option>
 										</select>
-									</div>
+									</div> --}}
 
 									
 
 									<div class="form-group rm03" >
 										<label for="title">Name of Product Sold</label>
-										<select class="form-control" name="product_id" id="product_id">
+										<select class="form-control" name="product_id" id="product_id" readonly>
 										<option value="">Select product</option>
 										@foreach(@$products as $value)
 										<option value="{{@$value->id}}" @if(@$data->product_id==@$value->id) selected @endif>{{@$value->product}}</option>
@@ -116,14 +116,14 @@
 
 
 
-									<div class="form-group rm03" >
+									{{-- <div class="form-group rm03" >
 										<label for="title">Unit</label>
 										<select class="form-control" name="unit" id="role_id">
 										<option value="">Select unit</option>
 										<option value="Kilogram" @if(@$data->unit=="Kilogram") selected @endif>Kilogram</option>
 										<option value="Nos" @if(@$data->unit=="Nos") selected @endif>Nos</option>
 										</select>
-									</div>
+									</div> --}}
 
 									<div class="form-group rm03">
 										<label for="title">Price Per Unit (Nu.)</label>

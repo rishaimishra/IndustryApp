@@ -47,11 +47,11 @@
 
 									<div class="form-group rm03">
 										<label for="title">Year</label>
-										<input type="number"  class="form-control"  placeholder="Enter year" value="{{@$data->year}}" name="year" >
+										<input type="number"  class="form-control"  placeholder="Enter year" value="{{@$data->year}}" name="year" readonly>
 									</div>
 
 
-									<div class="form-group ">
+									{{-- <div class="form-group ">
 										<label for="title">Report From Month</label>
 										<select class="form-control" name="from_month" id="from_month">
 										<option value="">Select month</option>
@@ -87,7 +87,7 @@
 										<option value="Nov" @if(@$data->end_month=="Nov") selected @endif>Nov</option>
 										<option value="Dec" @if(@$data->end_month=="Dec") selected @endif>Dec</option>
 										</select>
-									</div>
+									</div> --}}
 
 
 
@@ -131,7 +131,7 @@
 									
 									<div class="clearfix"></div>
 									<div class="col-lg-12" style="margin-top: 10px;">
-										<button class="btn btn-primary waves-effect waves-light w-md" type="submit">Add</button>
+										<button class="btn btn-primary waves-effect waves-light w-md" type="submit">Update</button>
 									</div>
 								</form>
 							</div>

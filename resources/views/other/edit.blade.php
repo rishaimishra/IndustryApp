@@ -51,44 +51,7 @@
 									</div>
 
 
-									<div class="form-group ">
-										<label for="title">Report From Month</label>
-										<select class="form-control" name="from_month" id="from_month">
-										<option value="">Select month</option>
-										<option value="Jan" @if(@$data->from_month=="Jan") selected @endif>Jan</option>
-										<option value="Feb" @if(@$data->from_month=="Feb") selected @endif>Feb</option>
-										<option value="Mar" @if(@$data->from_month=="Mar") selected @endif>Mar</option>
-										<option value="Apl" @if(@$data->from_month=="Apl") selected @endif>Apl</option>
-										<option value="May" @if(@$data->from_month=="May") selected @endif>May</option>
-										<option value="Jun" @if(@$data->from_month=="Jun") selected @endif>Jun</option>
-										<option value="Jul" @if(@$data->from_month=="Jul") selected @endif>Jul</option>
-										<option value="Aug" @if(@$data->from_month=="Aug") selected @endif>Aug</option>
-										<option value="Sept" @if(@$data->from_month=="Sept") selected @endif>Sept</option>
-										<option value="Oct" @if(@$data->from_month=="Oct") selected @endif>Oct</option>
-										<option value="Nov" @if(@$data->from_month=="Nov") selected @endif>Nov</option>
-										<option value="Dec" @if(@$data->from_month=="Dec") selected @endif>Dec</option>
-										</select>
-									</div>
-
-									<div class="form-group">
-										<label for="title">Report End Month</label>
-										<select class="form-control" name="end_month" id="end_month">
-										<option value="">Select month</option>
-										<option value="Jan" @if(@$data->end_month=="Jan") selected @endif>Jan</option>
-										<option value="Feb" @if(@$data->end_month=="Feb") selected @endif>Feb</option>
-										<option value="Mar" @if(@$data->end_month=="Mar") selected @endif>Mar</option>
-										<option value="Apl" @if(@$data->end_month=="Apl") selected @endif>Apl</option>
-										<option value="May" @if(@$data->end_month=="May") selected @endif>May</option>
-										<option value="Jun" @if(@$data->end_month=="Jun") selected @endif>Jun</option>
-										<option value="Jul" @if(@$data->end_month=="Jul") selected @endif>Jul</option>
-										<option value="Aug" @if(@$data->end_month=="Aug") selected @endif>Aug</option>
-										<option value="Sept" @if(@$data->end_month=="Sept") selected @endif>Sept</option>
-										<option value="Oct" @if(@$data->end_month=="Oct") selected @endif>Oct</option>
-										<option value="Nov" @if(@$data->end_month=="Nov") selected @endif>Nov</option>
-										<option value="Dec" @if(@$data->end_month=="Dec") selected @endif>Dec</option>
-										</select>
-									</div>
-
+									
 
 
 									<div class="form-group rm03">

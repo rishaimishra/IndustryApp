@@ -47,11 +47,11 @@
 
 									<div class="form-group rm03">
 										<label for="title">Year</label>
-										<input type="number"  class="form-control"  placeholder="Enter year" value="{{@$data->year}}" name="year" >
+										<input type="number"  class="form-control"  placeholder="Enter year" value="{{@$data->year}}" name="year" readonly>
 									</div>
 
 
-									<div class="form-group ">
+									{{-- <div class="form-group ">
 										<label for="title">Report From Month</label>
 										<input type="date"  class="form-control"  placeholder="Enter name" value="{{@$data->from_month}}"  name="from_month" >
 									</div>
@@ -59,13 +59,13 @@
 									<div class="form-group">
 										<label for="title">Report End Month</label>
 										<input type="date"  class="form-control"  placeholder="Enter email" value="{{@$data->end_month}}" name="end_month"  >
-									</div>
+									</div> --}}
 
 									
 
 									<div class="form-group rm03" >
 										<label for="title">Name of Product Sold</label>
-										<select class="form-control" name="product_id" id="product_id">
+										<select class="form-control" name="product_id" id="product_id" disabled>
 										<option value="">Select product</option>
 										@foreach(@$products as $value)
 										<option value="{{@$value->id}}" @if(@$data->product_id==@$value->id) selected @endif>{{@$value->product}}</option>
@@ -73,6 +73,16 @@
 										</select>
 									</div>
 
+
+									<div class="form-group rm03" >
+										<label for="title">Country</label>
+										<select class="form-control" name="country" id="country">
+										<option value="">Select Country</option>
+										@foreach(@$country as $value)
+										<option value="{{@$value->country_name}}" @if(@$data->country==@$value->country_name) selected @endif>{{@$value->country_name}}</option>
+										@endforeach
+										</select>
+									</div>
 
 									
 
@@ -88,14 +98,14 @@
 
 
 
-									<div class="form-group rm03" >
+									{{-- <div class="form-group rm03" >
 										<label for="title">Unit</label>
 										<select class="form-control" name="unit" id="role_id">
 										<option value="">Select unit</option>
 										<option value="Kilogram" @if(@$data->unit=="Kilogram") selected @endif>Kilogram</option>
 										<option value="Nos" @if(@$data->unit=="Nos") selected @endif>Nos</option>
 										</select>
-									</div>
+									</div> --}}
 
 									<div class="form-group rm03">
 										<label for="title">Price Per Unit (Nu.)</label>

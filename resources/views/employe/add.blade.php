@@ -45,11 +45,11 @@
 
 									<div class="form-group rm03">
 										<label for="title">Year</label>
-										<input type="number"  class="form-control"  placeholder="Enter year"  name="year" >
+										<input type="number"  class="form-control"  placeholder="Enter year" readonly name="year" value="{{@$get_time_data->year}}">
 									</div>
 
 
-									<div class="form-group ">
+									{{-- <div class="form-group ">
 										<label for="title">Report From Month</label>
 										<select class="form-control" name="from_month" id="from_month">
 										<option value="">Select month</option>
@@ -86,7 +86,7 @@
 										<option value="Dec">Dec</option>
 										</select>
 									</div>
-
+ --}}
 									
 
 									
@@ -157,7 +157,7 @@
 										<option value="">Select</option>
 										<option value="Regular">Regular</option>
 										<option value="Contract">Contract</option>
-										<option value="Causal">Causal</option>
+										<option value="Casual">Casual</option>
 										<option value="Self Employed">Self Employed</option>
 										</select>
 										

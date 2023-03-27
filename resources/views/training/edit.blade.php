@@ -47,47 +47,11 @@
 
 									<div class="form-group rm03">
 										<label for="title">Year</label>
-										<input type="number"  class="form-control"  placeholder="Enter year" value="{{@$data->year}}" name="year" >
+										<input type="number"  class="form-control"  placeholder="Enter year" value="{{@$data->year}}" name="year" readonly>
 									</div>
 
 
-									<div class="form-group ">
-										<label for="title">Report From Month</label>
-										<select class="form-control" name="from_month" id="from_month">
-										<option value="">Select month</option>
-										<option value="Jan" @if(@$data->from_month=="Jan") selected @endif>Jan</option>
-										<option value="Feb" @if(@$data->from_month=="Feb") selected @endif>Feb</option>
-										<option value="Mar" @if(@$data->from_month=="Mar") selected @endif>Mar</option>
-										<option value="Apl" @if(@$data->from_month=="Apl") selected @endif>Apl</option>
-										<option value="May" @if(@$data->from_month=="May") selected @endif>May</option>
-										<option value="Jun" @if(@$data->from_month=="Jun") selected @endif>Jun</option>
-										<option value="Jul" @if(@$data->from_month=="Jul") selected @endif>Jul</option>
-										<option value="Aug" @if(@$data->from_month=="Aug") selected @endif>Aug</option>
-										<option value="Sept" @if(@$data->from_month=="Sept") selected @endif>Sept</option>
-										<option value="Oct" @if(@$data->from_month=="Oct") selected @endif>Oct</option>
-										<option value="Nov" @if(@$data->from_month=="Nov") selected @endif>Nov</option>
-										<option value="Dec" @if(@$data->from_month=="Dec") selected @endif>Dec</option>
-										</select>
-									</div>
-
-									<div class="form-group">
-										<label for="title">Report End Month</label>
-										<select class="form-control" name="end_month" id="end_month">
-										<option value="">Select month</option>
-										<option value="Jan" @if(@$data->end_month=="Jan") selected @endif>Jan</option>
-										<option value="Feb" @if(@$data->end_month=="Feb") selected @endif>Feb</option>
-										<option value="Mar" @if(@$data->end_month=="Mar") selected @endif>Mar</option>
-										<option value="Apl" @if(@$data->end_month=="Apl") selected @endif>Apl</option>
-										<option value="May" @if(@$data->end_month=="May") selected @endif>May</option>
-										<option value="Jun" @if(@$data->end_month=="Jun") selected @endif>Jun</option>
-										<option value="Jul" @if(@$data->end_month=="Jul") selected @endif>Jul</option>
-										<option value="Aug" @if(@$data->end_month=="Aug") selected @endif>Aug</option>
-										<option value="Sept" @if(@$data->end_month=="Sept") selected @endif>Sept</option>
-										<option value="Oct" @if(@$data->end_month=="Oct") selected @endif>Oct</option>
-										<option value="Nov" @if(@$data->end_month=="Nov") selected @endif>Nov</option>
-										<option value="Dec" @if(@$data->end_month=="Dec") selected @endif>Dec</option>
-										</select>
-									</div>
+									
 
 									
 
@@ -96,10 +60,7 @@
 										<input type="text"  class="form-control"  placeholder="Enter Name Of The Training"  name="name" required value="{{@$data->name}}">
 									</div>
 
-									<div class="form-group rm03">
-										<label for="title">Training Provider</label>
-										<input type="text"  class="form-control"  placeholder="Enter Training Provider"  name="provider" required value="{{@$data->provider}}">
-									</div>
+									
 
 									<div class="form-group rm03">
 										<label for="title">Number of Employees Trained</label>
@@ -107,6 +68,25 @@
 									</div>
 
 
+									<div class="form-group rm03">
+										<label for="title">Start Date</label>
+										<input type="date"  class="form-control"  placeholder="Enter Number of Employees Trained"  name="start_date" value="{{@$data->start_date}}" required>
+									</div>
+
+									<div class="form-group rm03">
+										<label for="title">End Date</label>
+										<input type="date"  class="form-control"  placeholder="Enter Number of Employees Trained"  name="end_date" value="{{@$data->end_date}}" required>
+									</div>
+
+									<div class="form-group rm03">
+										<label for="title">Supported by RGoB</label>
+										<input type="text"  class="form-control"  placeholder="Enter Supported by RGoB"  name="rgob" value="{{@$data->rgob}}" required>
+									</div>
+
+									<div class="form-group rm03">
+										<label for="title">Supported by Self Financing</label>
+										<input type="text"  class="form-control"  placeholder="Enter Supported by Self Financing" value="{{@$data->self}}"  name="self" required>
+									</div>
 										
 
 									

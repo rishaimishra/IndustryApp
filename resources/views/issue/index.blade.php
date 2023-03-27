@@ -56,11 +56,15 @@
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     @include('includes.message')
                                     <div class="table-responsive">
+                                        <form method="POST" action="{{route('manage.issues.save.save.next')}}"  id="indus">
+                                            @csrf
+                                            <input type="hidden" name="type_submission" id="type_submission">
+                                            <input type="hidden" name="year" id="year" value="{{@$year->year}}">
                                         <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
                                                    <th>Year</th>
-                                                   <th>Reporting Month</th>
+                                                   {{-- <th>Reporting Month</th> --}}
                                                    <th>Issues and Challenges Faced</th>
                                                    <th>Support Required</th>
                                                    <th>Remarks</th>
@@ -70,15 +74,24 @@
                                             </thead>
                                             <tbody>
                                                 @if(@$data->isNotEmpty())
-                                                @foreach(@$data as $value)
+                                                @foreach(@$data as $key=> $value)
                                                 <tr>
                                                    
-                                                    <td>{{@$value->year}}</td>
-                                                    <td>{{@$value->from_month}} - {{@$value->end_month}}</td>
+                                                    <td>{{@$year->year}}</td>
+                                                    {{-- <td>{{@$value->from_month}} - {{@$value->end_month}}</td> --}}
+                                                    @if(@$value->year==@$year->year && @$value->status!="IP")
                                                     <td>{{@$value->issue}}</td>
-
                                                     <td>{{@$value->support}}</td>
                                                     <td>{{@$value->remark}}</td>
+                                                    @else
+
+                                                    <td><input type="text"    name="addmore[{{$key}}][issue]" class="form-control issue"  value="{{@$value->issue}}" ></td>
+                                                    
+                                                     <td><input type="text"    name="addmore[{{$key}}][support]" class="form-control support"  value="{{@$value->support}}" ></td>
+                                                   
+                                                    <td><input type="text"  name="addmore[{{$key}}][remark]" class="form-control remark"   value="{{@$value->remark}}"></td>
+
+                                                    @endif
                                                     
                                                     
                                                     <td class="rm07">
@@ -86,7 +99,9 @@
                                                         <div class="show-actions" id="show-{{$value->id}}" style="display: none;">
                                                             <span class="angle custom_angle"><img src="{{ URL::to('public/admin/assets/images/angle.png')}}" alt=""></span>
                                                             <ul>
+                                                                @if(@$value->year==@$year->year && @$value->status!="IP")
                                                                 <li><a href="{{route('manage.issues.edit',@$value->id)}}" >Edit </a></li>
+                                                                @endif
                                                                 
                                                                 <li><a href ="{{route('manage.issues.delete',['id'=>@$value->id])}}"data-bs-toggle="modal" data-bs-target="#exampleModal">Delete </a></li>
 
@@ -102,6 +117,36 @@
                                             </tbody>
                                         </table>
                                     </div>
+
+                                    <div class="panel-body">
+                                    <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <ol class="breadcrumb pull-right">
+                         
+                                        <li class="active"><button id="save"  class="btn btn-primary">Save Data</button></li>
+
+                                        <li class="active"><button id="save_next"  class="btn btn-primary">Save & Next Data</button></li>
+
+                                        <li class="active"><a href="{{route('manage.production.manufacture.add')}}" class="btn btn-primary">Cancel</a></li>
+                                        
+                                    </ol>
+
+                                </div>
+                            
+
+                            </div>
+                       
+
+
+
+                                     
+                                    
+
+                                    
+
+
+                                </div>
+                                </form>
 
 
                                     
@@ -162,6 +207,33 @@
  @endforeach
 </script>
 
+<script type="text/javascript">
+    $('#save').on('click',function(){
+        $('#type_submission').val('S');
+        $('#indus').submit();
+    });
+</script>
 
+<script type="text/javascript">
+    $('#save_next').on('click',function(){
+        $('#type_submission').val('SN');
+        $('#indus').submit();
+    });
+</script>
+
+<script type="text/javascript">
+    jQuery.validator.addClassRules('name', {
+        required: true,
+    });
+    jQuery.validator.addClassRules('provider', {
+        required: true,
+    });
+    jQuery.validator.addClassRules('number_employee', {
+        required: true,
+    });
+
+    $('#indus').validate();
+
+</script>
 
 @endsection

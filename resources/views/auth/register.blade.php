@@ -6,6 +6,16 @@
 
 @section('style')
 @include('includes.style')
+<style type="text/css">
+    .wrapper-page {
+    margin: 7.5% auto;
+    width: 1000px;
+}
+
+.form-group input[type]{
+    width: 90%;
+}
+</style>
 @endsection
 
 
@@ -15,45 +25,62 @@
    
 
     <div class="panel-body">
+        {{-- <h2 style="text-align:center;">Industry Information System</h2> --}}
          @include('includes.message')
-          <h3 style="text-align:center;">Industry Registration</h3>
+          <h3 style="text-align:center;">Registration for Industry User</h3>
         <form class="form-horizontal m-t-20" action="{{route('register.industry')}}" method="POST" id="login_form">
             @csrf
-
+            <div class="row">
+            <div class="col-md-6">
             <div class="form-group">
                 <label for="title">Cid</label>
-                    <input class="form-control input-lg" type="text" placeholder="cid" name="cid">
+                    <input class="form-control" type="text" placeholder="cid" name="cid">
             </div>
+        </div>
 
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="title">Name</label>
-                    <input class="form-control input-lg" type="text" placeholder="name" name="name">
+                    <input class="form-control" type="text" placeholder="name" name="name">
             </div>
+        </div>
             
+            <div class="col-md-6">
             <div class="form-group">
                     <label for="title">Date Of Birth</label>
                     <input class="form-control input-lg" type="date" placeholder="date of birth" name="dob">
             </div>
+        </div>
             
+
+            <div class="col-md-6">
             <div class="form-group">
-                <label for="title">Email</label>
+                <label for="title">Email (Username)</label>
                     <input class="form-control input-lg" type="text" placeholder="email" name="email" id="email">
             </div>
+        </div>
 
+            <div class="col-md-6">
             <div class="form-group">
                 <label for="title">Password</label>
                     <input class="form-control input-lg" type="password" placeholder="password" name="password">
             </div>
+        </div>
 
+
+            <div class="col-md-6">
             <div class="form-group">
                 <label for="title">Phone</label>
                     <input class="form-control input-lg" type="text" placeholder="phone" name="phone">
             </div>
+        </div>
 
+            <div class="col-md-6">
             <div class="form-group">
                 <label for="title">Designation</label>
                     <input class="form-control input-lg" type="text" placeholder="designation" name="designation">
             </div>
+        </div>
 
 
             
@@ -61,10 +88,14 @@
             
 
            
-
+            <div class="clearfix"></div>
             <div class="form-group text-center m-t-40">
-                <div class="col-xs-12">
+                <div class="col-xs-6">
                     <a href="index.html"> <button class="btn btn-primary btn-lg w-lg waves-effect waves-light rm01" type="submit">Register</button></a>
+                </div>
+
+                <div class="col-xs-6">
+                    <a href="{{route('register')}}"> <a href="{{route('register')}}" class="btn btn-primary btn-lg w-lg waves-effect waves-light rm01" type="submit">Cancel</a></a>
                 </div>
             </div>
 
@@ -126,9 +157,9 @@
                 phone:{
                     required: true,
                 },
-                designation:{
-                    required: true,
-                }
+                // designation:{
+                //     required: true,
+                // }
             },
             messages:{
                 password:{

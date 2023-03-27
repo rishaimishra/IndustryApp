@@ -59,7 +59,7 @@
                                         <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                   <th>Nature of Employmen</th>
+                                                   <th>Nature of Employment</th>
                                                    <th>Bhutanese Male</th>
                                                    <th>Bhutanese Female</th>
                                                    <th>Bhutanese Total</th>
@@ -67,10 +67,293 @@
                                                    <th>Non Bhutanese Female</th>
                                                    <th>Non Bhutanese Total</th>
                                                    <th>Total People</th>
-                                                   <th class="rm07" style="text-align:center;">Action</th>
+                                                   
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <tr>
+                                                    <td>
+                                                        Regular
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                        $bm = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('gender','Male')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('nature_employe','Regular')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$bm}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $bf = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('gender','Female')->where('nature_employe','Regular')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$bf}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $bt = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('nature_employe','Regular')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$bt}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbm = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('gender','Male')->where('nature_employe','Regular')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        // dd($nbm);
+                                                        @endphp
+                                                        {{@$nbm}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbf = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('gender','Female')->where('nature_employe','Regular')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$nbf}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbt = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('nature_employe','Regular')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$nbt}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $total = DB::table('employe')->where('parent_delete_id','0')->where('nature_employe','Regular')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$total}}
+                                                    </td>
+                                                </tr>
+
+
+                                                {{-- contract --}}
+                                                <tr>
+                                                    <td>
+                                                        Contract
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                        $bmc = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('gender','Male')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('nature_employe','Contract')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$bmc}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $bfc = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('gender','Female')->where('nature_employe','Contract')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$bfc}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $btc = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('nature_employe','Contract')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$btc}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbmc = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('gender','Male')->where('nature_employe','Contract')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        // dd($nbm);
+                                                        @endphp
+                                                        {{@$nbmc}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbfc = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('gender','Female')->where('nature_employe','Contract')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$nbfc}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbtc = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('nature_employe','Contract')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$nbtc}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $totalc = DB::table('employe')->where('parent_delete_id','0')->where('nature_employe','Contract')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$totalc}}
+                                                    </td>
+                                                </tr>
+
+                                                {{-- casual --}}
+
+                                                <tr>
+                                                    <td>
+                                                        Casual
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                        $bmcc = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('gender','Male')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('nature_employe','Casual')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$bmcc}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $bfcc = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('gender','Female')->where('nature_employe','Casual')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$bfcc}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $btcc = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('nature_employe','Casual')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$btcc}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbmcc = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('gender','Male')->where('nature_employe','Casual')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        // dd($nbm);
+                                                        @endphp
+                                                        {{@$nbmcc}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbfcc = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('gender','Female')->where('nature_employe','Casual')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$nbfcc}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbtcc = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('nature_employe','Casual')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$nbtcc}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $totalcc = DB::table('employe')->where('parent_delete_id','0')->where('nature_employe','Casual')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$totalcc}}
+                                                    </td>
+                                                </tr>
+
+
+
+                                                {{-- Self Employed --}}
+
+                                                <tr>
+                                                    <td>
+                                                        Self Employed
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                        $bmccs = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('gender','Male')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('nature_employe','Self Employed')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$bmccs}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $bfccs = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('gender','Female')->where('nature_employe','Self Employed')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$bfccs}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $btccs = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('nature_employe','Self Employed')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$btccs}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbmccs = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('gender','Male')->where('nature_employe','Self Employed')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        // dd($nbm);
+                                                        @endphp
+                                                        {{@$nbmccs}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbfccs = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('gender','Female')->where('nature_employe','Self Employed')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$nbfccs}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbtccs = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('nature_employe','Self Employed')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$nbtccs}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $totalccs = DB::table('employe')->where('parent_delete_id','0')->where('nature_employe','Self Employed')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$totalccs}}
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>
+                                                       Total
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                        $bmccst = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('gender','Male')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$bmccst}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $bfccst = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('gender','Female')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$bfccst}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $btccst = DB::table('employe')->where('parent_delete_id','0')->where('nationality','Bhutan')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$btccst}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbmccst = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('gender','Male')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        // dd($nbm);
+                                                        @endphp
+                                                        {{@$nbmccst}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbfccst = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('gender','Female')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$nbfccst}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $nbtccst = DB::table('employe')->where('parent_delete_id','0')->where('nationality','!=','Bhutan')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$nbtccst}}
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                        $totalccst = DB::table('employe')->where('parent_delete_id','0')->where('type','H')->where('year',@$year)->where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->count();
+                                                        @endphp
+                                                        {{@$totalccst}}
+                                                    </td>
+                                                </tr>
                                                 
                                                 
                                             </tbody>
@@ -127,14 +410,7 @@
 </script>
 
 
-<script type="text/javascript">
-  @foreach (@$data as $value)
-    $("#action{{$value->id}}").click(function(){
-        $('.show-actions:not(#show-{{$value->id}})').slideUp();
-        $("#show-{{$value->id}}").slideToggle();
-    });
- @endforeach
-</script>
+
 
 
 

@@ -34,7 +34,7 @@
                 <div class="col-sm-12">
                     <h4 class="pull-left page-title">Manage Agent</h4>
                     <ol class="breadcrumb pull-right">
-                        <li class="active"><a href="{{route('manage.agent.add.view')}}">+ Add Agent</a></li>
+                        <li class="active"><a href="{{route('manage.agent.add.view')}}">+ Add User</a></li>
                         
                     </ol>
                 </div>

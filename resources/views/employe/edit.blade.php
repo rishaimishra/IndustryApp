@@ -47,11 +47,11 @@
 
 									<div class="form-group rm03">
 										<label for="title">Year</label>
-										<input type="number"  class="form-control"  placeholder="Enter year" value="{{@$data->year}}" name="year" >
+										<input type="number"  class="form-control"  placeholder="Enter year" value="{{@$data->year}}" name="year" readonly>
 									</div>
 
 
-									<div class="form-group ">
+									{{-- <div class="form-group ">
 										<label for="title">Report From Month</label>
 										<select class="form-control" name="from_month" id="from_month">
 										<option value="">Select month</option>
@@ -88,7 +88,7 @@
 										<option value="Dec" @if(@$data->end_month=="Dec") selected @endif>Dec</option>
 										</select>
 									</div>
-
+ --}}
 
 
 									<div class="form-group rm03" >
@@ -151,7 +151,7 @@
 										<option value="">Select</option>
 										<option value="Regular" @if(@$data->nature_employe=="Regular") selected @endif>Regular</option>
 										<option value="Contract" @if(@$data->nature_employe=="Contract") selected @endif>Contract</option>
-										<option value="Causal" @if(@$data->nature_employe=="Causal") selected @endif>Causal</option>
+										<option value="Casual" @if(@$data->nature_employe=="Casual") selected @endif>Casual</option>
 										<option value="Self Employed" @if(@$data->nature_employe=="Self Employed") selected @endif>Self Employed</option>
 										</select>
 										

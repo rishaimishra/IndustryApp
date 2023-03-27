@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Industry;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Finance;
+use App\Models\Time;
 class FinanceController extends Controller
 {
     public function index()
     {
         $data = [];
-        $data['data'] = Finance::where('status','!=','D')->where('user_id',auth()->user()->id)->orderBy('id','desc')->get();
+        $data['get_time_data'] = Time::whereDate('from_date', '<=', date('Y-m-d'))
+            ->whereDate('end_date', '>=',date('Y-m-d'))->where('type','Y')->first();
+        $data['data'] = Finance::where('status','!=','D')->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->where('year',$data['get_time_data']->year)->orderBy('id','desc')->get();
         return view('finance.index',$data);
     }
 
@@ -22,43 +25,31 @@ class FinanceController extends Controller
 
     public function insert(Request $request)
     {
+        if (@$request->addmore) {
+        foreach(@$request->addmore as $value)
+        {
         $production = new Finance;
         $production->year = $request->year;
-        $production->from_month = $request->from_month;
-        $production->end_month = $request->end_month;
-        $production->total_income = $request->total_income;
-        $production->total_expenditure = $request->total_expenditure;
-        $production->profit_loss = $request->profit_loss;
-        $production->cit_bit = $request->cit_bit;
-        $production->dd = $request->dd;
+        $production->total_income = $value['total_income'];
+        $production->total_expenditure = $value['total_expenditure'];
+        $production->profit_loss = $value['profit_loss'];
+        $production->cit_bit = $value['cit_bit'];
+        $production->dd = $value['dd'];
         
 
         $production->user_id = auth()->user()->id;
+        $production->profile_id = auth()->user()->current_profile;
         $production->save();
-        return redirect()->back()->with('success','Data Saved Successfully');
-    }
-
-    public function deleteView($id)
-    {
-        $data = [];
-        $data['data'] = Finance::where('id',$id)->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
-        if($data['data']!="")
-        {
-            return view('finance.delete',$data);
+        }
+        }
+        if (@$request->type_submission=="S") {
+            return redirect()->back()->with('success','Data Saved Successfully');
         }else{
-            return redirect()->back()->with('error','Something Went Wrong');
+            return redirect()->route('manage.revenue.csi-yearly');
         }
     }
 
-    public function deleteSubmit(Request $request)
-    {
-        Finance::where('id',$request->id)->update([
-            'status'=>'D',
-            'reason'=>$request->reason,
-            'delete_date'=>date('Y-m-d')
-        ]);
-        return redirect()->route('manage.finance')->with('success','Data Deleted Successfully');
-    }
+
 
     public function edit($id)
     {

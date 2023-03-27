@@ -34,9 +34,9 @@
                 <div class="col-sm-12">
                     <h4 class="pull-left page-title">Manage Industry Profile</h4>
                     <ol class="breadcrumb pull-right">
-                         @if(@$data->isEmpty())
-                        <li class="active"><a href="{{route('manage.agent.add.view')}}" class="btn btn-primary">+ Add Profile</a></li>
-                        @endif
+                         {{-- @if(@$data->isEmpty()) --}}
+                        <li class="active"><a href="{{route('manage.industry.profile.addview')}}" class="btn btn-primary">+ Add Profile</a></li>
+                        {{-- @endif --}}
                     </ol>
                  </div>
             </div>

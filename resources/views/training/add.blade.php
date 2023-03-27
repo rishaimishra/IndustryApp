@@ -45,47 +45,11 @@
 
 									<div class="form-group rm03">
 										<label for="title">Year</label>
-										<input type="number"  class="form-control"  placeholder="Enter year"  name="year" >
+										<input type="number"  class="form-control" value="{{@$get_time_data->year}}" readonly placeholder="Enter year"  name="year" >
 									</div>
 
 
-									<div class="form-group ">
-										<label for="title">Report From Month</label>
-										<select class="form-control" name="from_month" id="from_month">
-										<option value="">Select month</option>
-										<option value="Jan">Jan</option>
-										<option value="Feb">Feb</option>
-										<option value="Mar">Mar</option>
-										<option value="Apl">Apl</option>
-										<option value="May">May</option>
-										<option value="Jun">Jun</option>
-										<option value="Jul">Jul</option>
-										<option value="Aug">Aug</option>
-										<option value="Sept">Sept</option>
-										<option value="Oct">Oct</option>
-										<option value="Nov">Nov</option>
-										<option value="Dec">Dec</option>
-										</select>
-									</div>
-
-									<div class="form-group">
-										<label for="title">Report End Month</label>
-										<select class="form-control" name="end_month" id="end_month">
-										<option value="">Select month</option>
-										<option value="Jan">Jan</option>
-										<option value="Feb">Feb</option>
-										<option value="Mar">Mar</option>
-										<option value="Apl">Apl</option>
-										<option value="May">May</option>
-										<option value="Jun">Jun</option>
-										<option value="Jul">Jul</option>
-										<option value="Aug">Aug</option>
-										<option value="Sept">Sept</option>
-										<option value="Oct">Oct</option>
-										<option value="Nov">Nov</option>
-										<option value="Dec">Dec</option>
-										</select>
-									</div>
+									
 
 									
 
@@ -97,14 +61,31 @@
 										<input type="text"  class="form-control"  placeholder="Enter Name Of The Training"  name="name" required>
 									</div>
 
-									<div class="form-group rm03">
-										<label for="title">Training Provider</label>
-										<input type="text"  class="form-control"  placeholder="Enter Training Provider"  name="provider" required>
-									</div>
+									
 
 									<div class="form-group rm03">
 										<label for="title">Number of Employees Trained</label>
 										<input type="text"  class="form-control"  placeholder="Enter Number of Employees Trained"  name="number_employee" required>
+									</div>
+
+									<div class="form-group rm03">
+										<label for="title">Start Date</label>
+										<input type="date"  class="form-control"  placeholder="Enter Number of Employees Trained"  name="start_date" required>
+									</div>
+
+									<div class="form-group rm03">
+										<label for="title">End Date</label>
+										<input type="date"  class="form-control"  placeholder="Enter Number of Employees Trained"  name="end_date" required>
+									</div>
+
+									<div class="form-group rm03">
+										<label for="title">Supported by RGoB</label>
+										<input type="text"  class="form-control"  placeholder="Enter Supported by RGoB"  name="rgob" required>
+									</div>
+
+									<div class="form-group rm03">
+										<label for="title">Supported by Self Financing</label>
+										<input type="text"  class="form-control"  placeholder="Enter Supported by Self Financing"  name="self" required>
 									</div>
 
 									

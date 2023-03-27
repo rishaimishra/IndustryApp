@@ -2,7 +2,7 @@
     <!-- LOGO -->
     <div class="topbar-left">
         <div class="text-center">
-            <a href="#" class="logo"><img src="{{asset('public/admin/assets/images/logo.png')}}" style="height: 73px;width: 100%;"></a>
+            {{-- <a href="#" class="logo"><img src="{{asset('public/admin/assets/images/logo.png')}}" style="height: 73px;width: 100%;"></a> --}}
         </div>
     </div>
     <a id="menu-toggle" href="#" class="btn-menu toggle">
@@ -16,6 +16,9 @@
                     <button class="button-menu-mobile open-left">
                         {{-- <i class="fa fa-bars"></i> --}}
                     </button>
+                        <p style="text-align:center;margin-left: 400px; font-weight: 800;">Ministry Of Industry,Commerce and Employment</p>
+                        <p style="text-align:center;margin-left: 400px; font-weight: 800;">Department Of Industry</p>
+                        <p style="text-align:center;margin-left: 400px; font-weight: 800;">Industrial Information System</p>
                     <span class="clearfix"></span>
                 </div>
                 <!--<form class="navbar-form pull-left" role="search">

@@ -56,32 +56,60 @@
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     @include('includes.message')
                                     <div class="table-responsive">
+                                        <form method="POST" action="{{route('manage.production.manufacture.yearly.save.save.next')}}"  id="indus">
+                                            @csrf
+                                            <input type="hidden" name="type_submission" id="type_submission">
+                                            <input type="hidden" name="year" id="year" value="{{@$year->year}}">
+
                                         <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
                                                    <th>Year</th>
-                                                   <th>Reporting Month</th>
+                                                   {{-- <th>Reporting Month</th> --}}
                                                    <th>Name of Finished Product (s)</th>
-                                                   <th>Quantity Produced</th>
                                                    <th>Units</th>
+                                                   <th>Quantity Produced</th>
                                                    <th>Ex-Factory Price (Nu)</th>
                                                    <th>% Capacity Utilization</th>
                                                    <th class="rm07" style="text-align:center;">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                
                                                 @if(@$data->isNotEmpty())
-                                                @foreach(@$data as $value)
+                                                
+                                                @foreach(@$data as $key=> $value)
                                                 <tr>
-                                                   
-                                                    <td>{{@$value->year}}</td>
-                                                    <td>{{@$value->from_month}} - {{@$value->end_month}}</td>
+                                                    
+                                                   <td>{{@$year->year}}</td>
+                                                    
+                                                    {{-- <td>JAN - JUN</td> --}}
                                                     <td>{{@$value->product}}</td>
-
-                                                    <td>{{@$value->quantity}}</td>
                                                     <td>{{@$value->unit}}</td>
+                                                    
+                                                    @if(@$value->year==@$year->year && @$value->status!="IP" && @$value->type=="Y")
+                                                    <td>{{@$value->quantity}}</td>
+                                                    
                                                     <td>{{@$value->price}}</td>
                                                     <td>{{@$value->capacity}}</td>
+                                                    @else
+                                                    <input type="hidden"    name="addmore[{{$key}}][product]" class="form-control quantity" value="{{@$value->product}}">
+
+                                                    <input type="hidden"    name="addmore[{{$key}}][unit]" class="form-control quantity" value="{{@$value->unit}}">
+
+                                                    <td><input type="text"    name="addmore[{{$key}}][quantity]" class="form-control quantity" @if(@$value->status=="IP") value="{{@$value->quantity}}" @endif></td>
+                                                    
+                                                     <td><input type="text"    name="addmore[{{$key}}][price]" class="form-control prices" @if(@$value->status=="IP") value="{{@$value->price}}" @endif></td>
+                                                   
+                                                    <td><input type="text"  name="addmore[{{$key}}][capacity]" class="form-control capacity"  @if(@$value->status=="IP") value="{{@$value->capacity}}" @endif></td>
+
+                                                    
+
+                                                   @endif
+
+
+
+                                                   
                                                     
                                                     
                                                     
@@ -91,7 +119,9 @@
                                                         <div class="show-actions" id="show-{{$value->id}}" style="display: none;">
                                                             <span class="angle custom_angle"><img src="{{ URL::to('public/admin/assets/images/angle.png')}}" alt=""></span>
                                                             <ul>
+                                                                @if(@$value->year==@$year->year && @$value->type=="Y" && @$value->status!="IP")
                                                                 <li><a href="{{route('manage.production.manufacture.edit.yearly',@$value->id)}}" >Edit </a></li>
+                                                                @endif
                                                                 
                                                                 <li><a href ="{{route('manage.production.manufacture.delete.yearly',['id'=>@$value->id])}}"data-bs-toggle="modal" data-bs-target="#exampleModal">Delete </a></li>
 
@@ -107,14 +137,39 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <ol class="breadcrumb pull-right">
+                         
+                                        <li class="active"><button id="save"  class="btn btn-primary">Save Data</button></li>
+
+                                        <li class="active"><button id="save_next"  class="btn btn-primary">Save & Next Data</button></li>
+
+                                        <li class="active"><a href="{{route('manage.production.manufacture.add')}}" class="btn btn-primary">Cancel</a></li>
+                                        
+                                    </ol>
+
+                                </div>
+                            
+
+                            </div>
+                       
 
 
+
+                                     
                                     
 
                                     
 
 
                                 </div>
+                                </form>
+
+                
+                        
+                        
                             </div>
                         </div>
                     </div>
@@ -126,7 +181,6 @@
 
         </div>
         <!-- container -->
-
     </div>
     <!-- content -->
 
@@ -167,6 +221,33 @@
  @endforeach
 </script>
 
+<script type="text/javascript">
+    $('#save').on('click',function(){
+        $('#type_submission').val('S');
+        $('#indus').submit();
+    });
+</script>
+
+<script type="text/javascript">
+    $('#save_next').on('click',function(){
+        $('#type_submission').val('SN');
+        $('#indus').submit();
+    });
+</script>
+
+<script type="text/javascript">
+    jQuery.validator.addClassRules('quantity', {
+        required: true,
+    });
+    jQuery.validator.addClassRules('prices', {
+        required: true,
+    });
+    jQuery.validator.addClassRules('capacity', {
+        required: true,
+    });
+    $('#indus').validate();
+
+</script>
 
 
 @endsection

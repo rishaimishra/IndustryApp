@@ -26,7 +26,7 @@
 
             <div class="form-group">
                 <div class="col-xs-12">
-                    <input class="form-control input-lg" type="text" placeholder="Username" name="username" value="{{ @Cookie::get('activarmor_admin_user_email') == null ? old('email'): @Cookie::get('activarmor_admin_user_email')}}">
+                    <input class="form-control input-lg" type="text" placeholder="Email (Username)" name="username" value="{{ @Cookie::get('activarmor_admin_user_email') == null ? old('email'): @Cookie::get('activarmor_admin_user_email')}}">
                     @if ($errors->has('email'))
                     <span class="invalid-feedback error" role="alert">
                         <strong>{{ $errors->first('email') }}</strong>

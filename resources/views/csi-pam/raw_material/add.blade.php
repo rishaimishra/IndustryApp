@@ -45,11 +45,11 @@
 
 									<div class="form-group rm03">
 										<label for="title">Year</label>
-										<input type="number"  class="form-control"  placeholder="Enter year"  name="year" >
+										<input type="number"  class="form-control"  placeholder="Enter year"  name="year" readonly value="{{@$get_time_data->year}}">
 									</div>
 
 
-									<div class="form-group ">
+{{-- 									<div class="form-group ">
 										<label for="title">Report From Month</label>
 										<select class="form-control" name="from_month" id="from_month">
 										<option value="">Select month</option>
@@ -85,13 +85,23 @@
 										<option value="Nov">Nov</option>
 										<option value="Dec">Dec</option>
 										</select>
-									</div>
+									</div> --}}
 
 									
 
 									<div class="form-group rm03" >
 										<label for="title">Name of Raw Material</label>
 										<input type="text"  class="form-control"  placeholder="Enter Name of Raw Material"  name="name" >
+									</div>
+
+									<div class="form-group rm03" >
+										<label for="title">Type Of Raw</label>
+										<select class="form-control" name="type_raw" id="type_raw">
+										<option value="">Select Type Of Raw</option>
+										@foreach(@$type_raw as $value)
+										<option value="{{@$value->name}}">{{@$value->name}}</option>
+										@endforeach
+										</select>
 									</div>
 
 

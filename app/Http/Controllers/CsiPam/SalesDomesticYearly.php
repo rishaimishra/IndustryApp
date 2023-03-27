@@ -6,13 +6,42 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SalesDomestic;
 use App\Models\Production;
+use App\Models\Time;
 class SalesDomesticYearly extends Controller
 {
     public function index()
     {
         $data = [];
-        $data['data'] = SalesDomestic::where('status','!=','D')->where('type','Y')->where('user_id',auth()->user()->id)->orderBy('id','desc')->get();
+        $get_time_data = Time::whereDate('from_date', '<=', date('Y-m-d'))
+            ->whereDate('end_date', '>=',date('Y-m-d'))->where('type','H')->first();
+        $year = $get_time_data->year;
+        $data['year'] = $get_time_data;
+
+        $data['data'] = SalesDomestic::where('status','!=','D')->where('type','Y')->where('user_id',auth()->user()->id)->orderBy('id','desc')->where('profile_id',auth()->user()->current_profile)->where('year',$year)->get();
         return view('csi-pam.sales_domestic.index',$data);
+    }
+
+    public function save_next(Request $request)
+    {
+        if (@$request->addmore) {
+            // return $request->addmore;
+            foreach(@$request->addmore as $value)
+            {
+                SalesDomestic::where('product_id',$value['product_id'])->update([
+                    'quantity'=>$value['quantity'],
+                    'price'=>$value['price'],
+                    'value_of_sale'=>$value['value_of_sale'],
+                    'status'=>'AA',
+                    'type'=>'Y',
+                ]);
+            }    
+        }
+
+        if (@$request->type_submission=="S") {
+            return redirect()->back()->with('success','Data Saved Successfully');
+        }else{
+            return redirect()->route('manage.sales.export.yearly');
+        }    
     }
 
     public function add()

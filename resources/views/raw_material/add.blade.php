@@ -45,53 +45,27 @@
 
 									<div class="form-group rm03">
 										<label for="title">Year</label>
-										<input type="number"  class="form-control"  placeholder="Enter year"  name="year" >
+										<input type="number"  class="form-control"  placeholder="Enter year"  name="year" value="{{@$get_time_data->year}}" readonly>
 									</div>
 
 
-									<div class="form-group ">
-										<label for="title">Report From Month</label>
-										<select class="form-control" name="from_month" id="from_month">
-										<option value="">Select month</option>
-										<option value="Jan">Jan</option>
-										<option value="Feb">Feb</option>
-										<option value="Mar">Mar</option>
-										<option value="Apl">Apl</option>
-										<option value="May">May</option>
-										<option value="Jun">Jun</option>
-										<option value="Jul">Jul</option>
-										<option value="Aug">Aug</option>
-										<option value="Sept">Sept</option>
-										<option value="Oct">Oct</option>
-										<option value="Nov">Nov</option>
-										<option value="Dec">Dec</option>
-										</select>
-									</div>
-
-									<div class="form-group">
-										<label for="title">Report End Month</label>
-										<select class="form-control" name="end_month" id="end_month">
-										<option value="">Select month</option>
-										<option value="Jan">Jan</option>
-										<option value="Feb">Feb</option>
-										<option value="Mar">Mar</option>
-										<option value="Apl">Apl</option>
-										<option value="May">May</option>
-										<option value="Jun">Jun</option>
-										<option value="Jul">Jul</option>
-										<option value="Aug">Aug</option>
-										<option value="Sept">Sept</option>
-										<option value="Oct">Oct</option>
-										<option value="Nov">Nov</option>
-										<option value="Dec">Dec</option>
-										</select>
-									</div>
+									
 
 									
 
 									<div class="form-group rm03" >
 										<label for="title">Name of Raw Material</label>
 										<input type="text"  class="form-control"  placeholder="Enter Name of Raw Material"  name="name" >
+									</div>
+
+									<div class="form-group rm03" >
+										<label for="title">Type Of Raw</label>
+										<select class="form-control" name="type_raw" id="type_raw">
+										<option value="">Select Type Of Raw</option>
+										@foreach(@$type_raw as $value)
+										<option value="{{@$value->name}}">{{@$value->name}}</option>
+										@endforeach
+										</select>
 									</div>
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Industry;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\IndustryProfile;
+use App\Models\User;
 class IndustryProfileController extends Controller
 {
     public function index()
@@ -152,5 +153,16 @@ class IndustryProfileController extends Controller
     }
     
 
+    public function select_profile()
+    {
+        $data = [];
+        $data['data'] = IndustryProfile::where('user_id',auth()->user()->id)->get();
+        return view('select_profile.index',$data);
+    }
 
+    public function select_profile_update(Request $request)
+    {
+        User::where('id',auth()->user()->id)->update(['current_profile'=>@$request->id]);
+        return redirect()->back()->with('success','Profile Selected Successfully');
+    }
 }

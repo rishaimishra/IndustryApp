@@ -32,7 +32,7 @@
             <!-- Page-Title -->
             <div class="row">
                 <div class="col-sm-12">
-                    <h4 class="pull-left page-title">Manage Raw Material (Yearly)</h4>
+                    <h4 class="pull-left page-title">Manage Raw Material</h4>
                     <ol class="breadcrumb pull-right">
                          
                         <li class="active"><a href="{{route('manage.raw.material.add.yearly')}}" class="btn btn-primary">+ Add Data</a></li>
@@ -56,15 +56,21 @@
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     @include('includes.message')
                                     <div class="table-responsive">
+                                        <form method="POST" action="{{route('manage.raw.material.yearly.save.save.next')}}"  id="indus">
+                                            @csrf
+                                            <input type="hidden" name="type_submission" id="type_submission">
+                                            <input type="hidden" name="year" id="year" value="{{@$year->year}}">
                                         <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
                                                    <th>Year</th>
-                                                   <th>Reporting Month</th>
                                                    <th>Name of  Raw Material</th>
-                                                   <th>Quantity</th>
                                                    <th>Units</th>
+                                                   <th>Type of Raw Material</th>
                                                    <th>Sourced From Country</th>
+                                                   <th>Quantity</th>
+                                                   
+                                                   
                                                    <th>Price Per Unit</th>
                                                    <th>Value of Raw Materials</th>
                                                    <th class="rm07" style="text-align:center;">Action</th>
@@ -72,19 +78,58 @@
                                             </thead>
                                             <tbody>
                                                 @if(@$data->isNotEmpty())
-                                                @foreach(@$data as $value)
+                                                @foreach(@$data as $key=> $value)
                                                 <tr>
                                                    
-                                                    <td>{{@$value->year}}</td>
-                                                    <td>{{@$value->from_month}} - {{@$value->end_month}}</td>
+                                                    <td>{{@$year->year}}</td>
                                                     <td>{{@$value->name}}</td>
-
-                                                    <td>{{@$value->quantity}}</td>
                                                     <td>{{@$value->unit}}</td>
+                                                    
+
+
+                                                    @if(@$value->year==@$year->year && @$value->status!="IP" && @$value->type=="Y")
+                                                    <td>{{@$value->type_of_raw}}</td>
                                                     <td>{{@$value->country}}</td>
+                                                    <td>{{@$value->quantity}}</td>
                                                     <td>{{@$value->price}}</td>
                                                     <td>{{@$value->value_raw}}</td>
                                                     
+                                                    @else
+
+                                                    <td>
+                                                        <select name="addmore[{{$key}}][type_of_raw]" class="form-control type_of_raw">
+                                                            <option value="">Select Type</option>
+                                                            @foreach(@$type_raw as $raw)
+                                                            <option value="{{@$raw->name}}" @if(@$value->status=="IP") @if(@$value->type_of_raw==@$raw->name) selected @endif @endif>{{@$raw->name}}</option>
+                                                            @endforeach
+                                                            
+                                                        </select>
+                                                    </td>
+
+                                                    <input type="hidden"    name="addmore[{{$key}}][name]" class="form-control name" value="{{@$value->name}}">
+
+                                                    <input type="hidden"    name="addmore[{{$key}}][unit]" class="form-control unit" value="{{@$value->unit}}">
+
+                                                    <td>
+                                                        <select name="addmore[{{$key}}][country]" class="form-control country">
+                                                            <option value="">Select Country</option>
+                                                            @foreach(@$country as $ctr)
+                                                            <option value="{{@$ctr->country_name}}" @if(@$value->status=="IP") @if(@$value->country==@$ctr->country_name) selected @endif @endif>{{@$ctr->country_name}}</option>
+                                                            @endforeach
+                                                            
+                                                        </select>
+                                                    </td>
+
+
+                                                    <td><input type="text"    name="addmore[{{$key}}][quantity]" class="form-control quantity" @if(@$value->status=="IP") value="{{@$value->quantity}}" @endif></td>
+                                                    
+                                                     <td><input type="text"    name="addmore[{{$key}}][price]" class="form-control prices" @if(@$value->status=="IP") value="{{@$value->price}}" @endif></td>
+                                                   
+                                                    <td><input type="text"  name="addmore[{{$key}}][value_raw]" class="form-control value_raw"  @if(@$value->status=="IP") value="{{@$value->value_raw}}" @endif></td>
+
+
+
+                                                    @endif                                                    
                                                     
                                                     
 
@@ -93,7 +138,10 @@
                                                         <div class="show-actions" id="show-{{$value->id}}" style="display: none;">
                                                             <span class="angle custom_angle"><img src="{{ URL::to('public/admin/assets/images/angle.png')}}" alt=""></span>
                                                             <ul>
+
+                                                                @if(@$value->year==@$year->year && @$value->status!="IP")
                                                                 <li><a href="{{route('manage.raw.material.edit.yearly',@$value->id)}}" >Edit </a></li>
+                                                                @endif
                                                                 
                                                                 <li><a href ="{{route('manage.raw.material.delete.yearly',['id'=>@$value->id])}}"data-bs-toggle="modal" data-bs-target="#exampleModal">Delete </a></li>
 
@@ -109,6 +157,36 @@
                                             </tbody>
                                         </table>
                                     </div>
+
+                                    <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <ol class="breadcrumb pull-right">
+                         
+                                        <li class="active"><button id="save"  class="btn btn-primary">Save Data</button></li>
+
+                                        <li class="active"><button id="save_next"  class="btn btn-primary">Save & Next Data</button></li>
+
+                                        <li class="active"><a href="{{route('manage.production.manufacture.add')}}" class="btn btn-primary">Cancel</a></li>
+                                        
+                                    </ol>
+
+                                </div>
+                            
+
+                            </div>
+                       
+
+
+
+                                     
+                                    
+
+                                    
+
+
+                                </div>
+                                </form>
 
 
                                     
@@ -167,6 +245,39 @@
         $("#show-{{$value->id}}").slideToggle();
     });
  @endforeach
+</script>
+
+
+<script type="text/javascript">
+    $('#save').on('click',function(){
+        $('#type_submission').val('S');
+        $('#indus').submit();
+    });
+</script>
+
+<script type="text/javascript">
+    $('#save_next').on('click',function(){
+        $('#type_submission').val('SN');
+        $('#indus').submit();
+    });
+</script>
+
+<script type="text/javascript">
+    jQuery.validator.addClassRules('quantity', {
+        required: true,
+    });
+    jQuery.validator.addClassRules('prices', {
+        required: true,
+    });
+    jQuery.validator.addClassRules('value_raw', {
+        required: true,
+    });
+
+    jQuery.validator.addClassRules('country', {
+        required: true,
+    });
+    $('#indus').validate();
+
 </script>
 
 

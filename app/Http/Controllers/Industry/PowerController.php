@@ -5,63 +5,98 @@ namespace App\Http\Controllers\Industry;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Power;
+use App\Models\Time;
 class PowerController extends Controller
 {
     public function index()
     {
         $data = [];
-        $data['data'] = Power::where('status','!=','D')->where('user_id',auth()->user()->id)->orderBy('id','desc')->get();
+        $get_time_data = Time::whereDate('from_date', '<=', date('Y-m-d'))
+            ->whereDate('end_date', '>=',date('Y-m-d'))->where('type','H')->first();
+        $year = $get_time_data->year;
+        $data['year'] = $get_time_data;
+
+        $year_data = Power::where('year',$year)->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->where('type','H')->where('status','!=','IP')->where('parent_delete_id','0')->get();
+
+
+        if (count($year_data)>0) {
+            // return $year_data;
+           $data['data'] = Power::where('year',$year)->where('profile_id',auth()->user()->current_profile)->where('user_id',auth()->user()->id)->where('status','!=','IP')->where('status','!=','D')->where('type','H')->where('parent_delete_id','0')->get();
+        }else{
+
+
+            $previous_year = Power::where('user_id',auth()->user()->id)->where('year','<',$year)->where('profile_id',auth()->user()->current_profile)->latest('year')->first();
+            // return $previous_year;
+
+            
+            if ($previous_year!="") {
+            $previous_year1 = Power::where('status','!=','D')->where('user_id',auth()->user()->id)->orderBy('id','desc')->where('year',$previous_year->year)->where('profile_id',auth()->user()->current_profile)->where('type','Y')->pluck('id')->toArray();
+
+
+
+            
+
+            // $previous_year_delete_data_yearly = Power::where('status','D')->where('user_id',auth()->user()->id)->orderBy('id','desc')->where('year',$previous_year->year)->where('profile_id',auth()->user()->current_profile)->pluck('parent_delete_id')->toArray();
+
+            // $previous_year = array_diff($previous_year1,$previous_year_delete_data_yearly);
+
+            // return $previous_year;
+            $new_year_in_progress = Power::where('status','IP')->where('user_id',auth()->user()->id)->orderBy('id','desc')->where('year',$year)->where('profile_id',auth()->user()->current_profile)->pluck('id')->toArray();
+            // return $new_year_in_progress;
+            
+            $parent_delete_id =  Power::where('status','D')->where('user_id',auth()->user()->id)->orderBy('id','desc')->where('year',$year)->where('parent_delete_id','!=','0')->where('profile_id',auth()->user()->current_profile)->pluck('parent_delete_id')->toArray();
+           
+
+             $array_merge = array_merge($previous_year1,$new_year_in_progress);
+
+
+             $final_ids = array_diff($array_merge, $parent_delete_id);
+             $data['data'] = Power::whereIn('id',$final_ids)->get();
+
+                
+            }else{
+                $data['data'] = Power::where('id',0)->get();
+            }
+
+
+        }
+
+
         return view('power.index',$data);
     }
 
-    public function add()
+    public function save_next(Request $request)
     {
-        $data = [];
-        return view('power.add',$data);
-    }
-
-    public function insert(Request $request)
-    {
-        $production = new Power;
-        $production->year = $request->year;
-        $production->from_month = $request->from_month;
-        $production->end_month = $request->end_month;
-        $production->unit = $request->unit;
-        $production->approved_power = $request->approved_power;
-        $production->energy = $request->energy;
-        $production->charges = $request->charges;
-
-        $production->user_id = auth()->user()->id;
-        $production->save();
-        return redirect()->back()->with('success','Data Saved Successfully');
-    }
-
-    public function deleteView($id)
-    {
-        $data = [];
-        $data['data'] = Power::where('id',$id)->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
-        if($data['data']!="")
-        {
-            return view('power.delete',$data);
+        // return $value['product'];
+        if (@$request->addmore) {
+            foreach(@$request->addmore as $value)
+            {
+                
+                $production = new Power;
+                $production->year = $request->year;
+                $production->unit = $value['unit'];
+                $production->approved_power = $value['approved_power'];
+                $production->energy = $value['energy'];
+                $production->charges = $value['charges'];
+                $production->user_id = auth()->user()->id;
+                $production->profile_id = auth()->user()->current_profile;
+                $production->status = 'AA';
+                $production->save();
+            }
+        }
+        if (@$request->type_submission=="S") {
+            return redirect()->back()->with('success','Data Saved Successfully');
         }else{
-            return redirect()->back()->with('error','Something Went Wrong');
+            return redirect()->route('manage.employe');
         }
     }
 
-    public function deleteSubmit(Request $request)
-    {
-        Power::where('id',$request->id)->update([
-            'status'=>'D',
-            'reason'=>$request->reason,
-            'delete_date'=>date('Y-m-d')
-        ]);
-        return redirect()->route('manage.power')->with('success','Data Deleted Successfully');
-    }
+
 
     public function edit($id)
     {
         $data = [];
-        $data['data'] = Power::where('id',$id)->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
+        $data['data'] = Power::where('id',$id)->where('type','H')->where('user_id',auth()->user()->id)->where('status','!=','D')->first();
         
         if($data['data']!="")
         {

@@ -35,7 +35,7 @@
                     <h4 class="pull-left page-title">Manage Power Consumption</h4>
                     <ol class="breadcrumb pull-right">
                          
-                        <li class="active"><a href="{{route('manage.power.add')}}" class="btn btn-primary">+ Add Data</a></li>
+                        {{-- <li class="active"><a href="{{route('manage.power.add')}}" class="btn btn-primary">+ Add Data</a></li> --}}
                         
                     </ol>
                  </div>
@@ -56,11 +56,15 @@
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     @include('includes.message')
                                     <div class="table-responsive">
+                                        <form method="POST" action="{{route('manage.power.save.save.next')}}"  id="indus">
+                                            @csrf
+                                            <input type="hidden" name="type_submission" id="type_submission">
+                                            <input type="hidden" name="year" id="year" value="{{@$year->year}}">
                                         <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
                                                    <th>Year</th>
-                                                   <th>Reporting Month</th>
+                                                   {{-- <th>Reporting Month</th> --}}
                                                    <th>Units</th>
                                                    <th>Approved Power Capacity</th>
                                                    <th>Energy Consumption</th>
@@ -69,40 +73,80 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if(@$data->isNotEmpty())
-                                                @foreach(@$data as $value)
+                                                {{-- @if(@$data->isNotEmpty())
+                                                @foreach(@$data as $key=> $value) --}}
                                                 <tr>
                                                    
-                                                    <td>{{@$value->year}}</td>
-                                                    <td>{{@$value->from_month}} - {{@$value->end_month}}</td>
-                                                    <td>{{@$value->unit}}</td>
+                                                    <td>{{@$year->year}}</td>
+                                                    {{-- <td>{{@$value->from_month}} - {{@$value->end_month}}</td> --}}
 
-                                                    <td>{{@$value->approved_power}}</td>
-                                                    <td>{{@$value->energy}}</td>
-                                                    <td>{{@$value->charges}}</td>
+                                                    @if(@$data[0]->approved_power)
+                                                    <td>{{@$data[0]->unit}}</td>
+                                                    <td>{{@$data[0]->approved_power}}</td>
+                                                    <td>{{@$data[0]->energy}}</td>
+                                                    <td>{{@$data[0]->charges}}</td>
+                                                    @else
+                                                    <td>
+                                                        <select name="addmore[{{1}}][unit]" class="form-control unit" style="width: 200px;">
+                                                            <option value="">Select Unit</option>
+                                                            <option value="KW">KW</option>
+                                                            <option value="MW">MW</option>
+                                                        </select>  
+                                                    </td>
+                                                    
+                                                     <td><input type="text"    name="addmore[{{1}}][approved_power]" class="form-control approved_power" ></td>
+                                                   
+                                                    <td><input type="text"  name="addmore[{{1}}][energy]" class="form-control energy"    ></td>
+
+                                                    <td><input type="text"  name="addmore[{{1}}][charges]" class="form-control charges"  ></td>
+                                                    @endif
                                                     
                                                     <td class="rm07">
-                                                        <a href="javascript:void(0);" class="action-dots" id="action{{$value->id}}"><img src="{{ URL::to('public/admin/assets/images/action-dots.png')}}" alt=""></a>
-                                                        <div class="show-actions" id="show-{{$value->id}}" style="display: none;">
-                                                            <span class="angle custom_angle"><img src="{{ URL::to('public/admin/assets/images/angle.png')}}" alt=""></span>
-                                                            <ul>
-                                                                <li><a href="{{route('manage.power.edit',@$value->id)}}" >Edit </a></li>
-                                                                
-                                                                <li><a href ="{{route('manage.power.delete',['id'=>@$value->id])}}"data-bs-toggle="modal" data-bs-target="#exampleModal">Delete </a></li>
+                                                        
 
-
-                                                                 
-                                                             </ul>
+                                                                @if(@$data[0]->approved_power)
+                                                                <a href="{{route('manage.power.edit',@$data[0]->id)}}" >Edit </a>
+                                                                @endif
+                                                               
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                @endforeach
-                                                @endif
+                                                {{-- @endforeach
+                                                @endif --}}
                                                 
                                             </tbody>
                                         </table>
                                     </div>
 
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <ol class="breadcrumb pull-right">
+                                     
+                                                    <li class="active"><button id="save"  class="btn btn-primary">Save Data</button></li>
+
+                                                    <li class="active"><button id="save_next"  class="btn btn-primary">Save & Next Data</button></li>
+
+                                                    <li class="active"><a href="{{route('manage.production.manufacture.add')}}" class="btn btn-primary">Cancel</a></li>
+                                                    
+                                                </ol>
+
+                                            </div>
+                                        
+
+                                        </div>
+                       
+
+
+
+                                     
+                                    
+
+                                    
+
+
+                                </div>
+                                </form>
 
                                     
 
@@ -160,6 +204,38 @@
         $("#show-{{$value->id}}").slideToggle();
     });
  @endforeach
+</script>
+
+<script type="text/javascript">
+    $('#save').on('click',function(){
+        $('#type_submission').val('S');
+        $('#indus').submit();
+    });
+</script>
+
+<script type="text/javascript">
+    $('#save_next').on('click',function(){
+        $('#type_submission').val('SN');
+        $('#indus').submit();
+    });
+</script>
+
+<script type="text/javascript">
+    jQuery.validator.addClassRules('unit', {
+        required: true,
+    });
+    jQuery.validator.addClassRules('approved_power', {
+        required: true,
+    });
+    jQuery.validator.addClassRules('energy', {
+        required: true,
+    });
+
+    jQuery.validator.addClassRules('charges', {
+        required: true,
+    });
+    $('#indus').validate();
+
 </script>
 
 

@@ -35,7 +35,7 @@
                     <h4 class="pull-left page-title">Manage Production Sales In Domestic</h4>
                     <ol class="breadcrumb pull-right">
                          
-                        <li class="active"><a href="{{route('manage.sales.domestic.add')}}" class="btn btn-primary">+ Add Data</a></li>
+                        {{-- <li class="active"><a href="{{route('manage.sales.domestic.add')}}" class="btn btn-primary">+ Add Data</a></li> --}}
                         
                     </ol>
                  </div>
@@ -56,14 +56,18 @@
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     @include('includes.message')
                                     <div class="table-responsive">
+                                        <form method="POST" action="{{route('manage.sales.domestic.save.save.next')}}"  id="indus">
+                                            @csrf
+                                            <input type="hidden" name="type_submission" id="type_submission">
+                                            <input type="hidden" name="year" id="year" value="{{@$year->year}}">
                                         <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
                                                    <th>Year</th>
-                                                   <th>Reporting Month</th>
+                                                   {{-- <th>Reporting Month</th> --}}
                                                    <th>Name of  Product Sold</th>
-                                                   <th>Quantity</th>
                                                    <th>Units</th>
+                                                   <th>Quantity</th>
                                                    <th>Price Per Unit</th>
                                                    <th>Value Of Sales</th>
                                                    <th class="rm07" style="text-align:center;">Action</th>
@@ -71,17 +75,33 @@
                                             </thead>
                                             <tbody>
                                                 @if(@$data->isNotEmpty())
-                                                @foreach(@$data as $value)
+                                                @foreach(@$data as $key=> $value)
                                                 <tr>
                                                    
                                                     <td>{{@$value->year}}</td>
-                                                    <td>{{@$value->from_month}} - {{@$value->end_month}}</td>
+                                                    {{-- <td>{{@$value->from_month}} - {{@$value->end_month}}</td> --}}
                                                     <td>{{@$value->product_name->product}}</td>
 
+
+                                                   
+                                                    <td>{{@$value->product_name->unit}}</td>
+                                                     @if(@$value->status!="IP")
                                                     <td>{{@$value->quantity}}</td>
-                                                    <td>{{@$value->unit}}</td>
                                                     <td>{{@$value->price}}</td>
                                                     <td>{{@$value->value_of_sale}}</td>
+                                                    
+                                                    @else
+
+                                                    <input type="hidden"    name="addmore[{{$key}}][product_id]" class="form-control product_id" value="{{@$value->product_id}}">
+
+
+                                                    <td> <input type="text"    name="addmore[{{$key}}][quantity]" class="form-control quantity"></td>
+
+                                                    <td><input type="text"  name="addmore[{{$key}}][price]" class="form-control prices"></td>
+
+                                                    <td><input type="text"    name="addmore[{{$key}}][value_of_sale]" class="form-control value_of_sale"></td>
+                                                    
+                                                    @endif
                                                     
                                                     
                                                     
@@ -91,9 +111,11 @@
                                                         <div class="show-actions" id="show-{{$value->id}}" style="display: none;">
                                                             <span class="angle custom_angle"><img src="{{ URL::to('public/admin/assets/images/angle.png')}}" alt=""></span>
                                                             <ul>
+
+                                                                @if(@$value->year==@$year->year && @$value->status!="IP")
                                                                 <li><a href="{{route('manage.sales.domestic.edit',@$value->id)}}" >Edit </a></li>
+                                                                @endif
                                                                 
-                                                                <li><a href ="{{route('manage.sales.domestic.delete',['id'=>@$value->id])}}"data-bs-toggle="modal" data-bs-target="#exampleModal">Delete </a></li>
 
 
                                                                  
@@ -107,6 +129,35 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <ol class="breadcrumb pull-right">
+                         
+                                        <li class="active"><button id="save"  class="btn btn-primary">Save Data</button></li>
+
+                                        <li class="active"><button id="save_next"  class="btn btn-primary">Save Data & Next</button></li>
+
+                                        <li class="active"><a href="{{route('manage.production.manufacture.add')}}" class="btn btn-primary">Cancel</a></li>
+                                        
+                                    </ol>
+
+                                </div>
+                            
+
+                            </div>
+                       
+
+
+
+                                     
+                                    
+
+                                    
+
+
+                                </div>
+                                </form>
 
 
                                     
@@ -165,6 +216,35 @@
         $("#show-{{$value->id}}").slideToggle();
     });
  @endforeach
+</script>
+
+
+<script type="text/javascript">
+    $('#save').on('click',function(){
+        $('#type_submission').val('S');
+        $('#indus').submit();
+    });
+</script>
+
+<script type="text/javascript">
+    $('#save_next').on('click',function(){
+        $('#type_submission').val('SN');
+        $('#indus').submit();
+    });
+</script>
+
+<script type="text/javascript">
+    jQuery.validator.addClassRules('quantity', {
+        required: true,
+    });
+    jQuery.validator.addClassRules('prices', {
+        required: true,
+    });
+    jQuery.validator.addClassRules('value_of_sale', {
+        required: true,
+    });
+    $('#indus').validate();
+
 </script>
 
 
